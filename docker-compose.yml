@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   app:
     build:
@@ -11,6 +9,8 @@ services:
         GID: ${DOCKER_GID}
     container_name: laravel_app
     restart: unless-stopped
+    ports:
+      - "9000:9000"
     working_dir: /var/www
     volumes:
       - ./:/var/www
@@ -72,9 +72,9 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      - laravel_app
-      - laravel_redis
-      - laravel_mysql
+      - app
+      - redis
+      - mysql
     networks:
       - laravel
 
